@@ -3,7 +3,7 @@
   "description": "Custom form can be added as shortcode, all form submits are saved in cpt.",
   "keywords": ["wordpress", "plugin", "form", "shortcode", "cpt"],
   "homepage": "https://www.agiledrop.si/",
-  "license": "GPL-2.0+",
+  "license": "MIT",
   "authors": [{
     "name": "Agiledrop",
     "email": "info@agiledrop.com",
