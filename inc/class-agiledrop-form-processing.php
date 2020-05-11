@@ -14,7 +14,7 @@ if ( !class_exists( "Agiledrop_Form_Processing" ) ) {
 				<div class="form__group">
 					<label class="form__required" for="name">Ime in Priimek</label>
 					<input type="text" class="form__input" id="name" name="name"  value="<?php echo $_POST['name'];?>" required>
-					<p id="name-error" class="form__error">sdfsd</p>
+					<p id="name-error" class="form__error"></p>
 				</div>
 				<div class="form__group">
 					<label class="form__required" for="email">E-naslov</label>
@@ -62,6 +62,7 @@ if ( !class_exists( "Agiledrop_Form_Processing" ) ) {
 					</label>
 				</div>
 				<p id="form-status"></p>
+				<?php wp_nonce_field( 'handle_agiledrop_form', 'agiledrop_form_nonce' )?>
 				<button type="submit" class="form__button">Pošlji</button>
 			</form>
 			<?php
@@ -70,40 +71,45 @@ if ( !class_exists( "Agiledrop_Form_Processing" ) ) {
 
 
 		public function form_save( ) {
-			$name = wp_strip_all_tags( $_POST['name'] );
-			$email = wp_strip_all_tags( $_POST['email'] );
-			$location = wp_strip_all_tags( $_POST['location'] );
-			$status = "";
-			if ( isset( $_POST['status'] ) ) {
-				$status = $_POST['status'];
-			}
-			$job = "Ne zanima me zaposlitev.";
-			if ( $_POST['job'] == true ) {
-				$job = "Zanima me zaposlitev.";
-			}
-			$data = 'Ne dovolim uporabo podatkov.';
-			if ( $_POST['dataProcessing'] == true ){
-				$data = 'Dovolim uporabo podatkov.';
-			}
-			$options = get_option( 'agiledrop_form_options' );
+			if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'handle_agiledrop_form' ) ) {
+			    print 'Sorry, your nonce did not verify.';
+				exit;
+			} else {
+				$name = wp_strip_all_tags( $_POST['name'] );
+				$email = wp_strip_all_tags( $_POST['email'] );
+				$location = wp_strip_all_tags( $_POST['location'] );
+				$status = "";
+				if ( isset( $_POST['status'] ) ) {
+					$status = $_POST['status'];
+				}
+				$job = "Ne zanima me zaposlitev.";
+				if ( $_POST['job'] == true ) {
+					$job = "Zanima me zaposlitev.";
+				}
+				$data = 'Ne dovolim uporabo podatkov.';
+				if ( $_POST['dataProcessing'] == true ){
+					$data = 'Dovolim uporabo podatkov.';
+				}
+				$options = get_option( 'agiledrop_form_options' );
 
-			$args = array(
-				'post_title'    => $options['agiledrop_field_title'],
-				'post_type'     => 'agiledrop-message',
-				'post_status'   => 'publish',
-				'meta_input'    => array(
-					'name'      => $name,
-					'email'     => $email,
-					'location'  => $location,
-					'status'    => $status,
-					'job'       => $job,
-					'data'      => $data,
-				)
-			);
-			wp_insert_post( $args );
+				$args = array(
+					'post_title'    => $options['agiledrop_field_title'],
+					'post_type'     => 'agiledrop-message',
+					'post_status'   => 'publish',
+					'meta_input'    => array(
+						'name'      => $name,
+						'email'     => $email,
+						'location'  => $location,
+						'status'    => $status,
+						'job'       => $job,
+						'data'      => $data,
+					)
+				);
+				wp_insert_post( $args );
 
-			if ( $options['agiledrop_field_mail'] === 'yes' ) {
-			    $this->send_mail( $options['agiledrop_field_title'], $email );
+				if ( $options['agiledrop_field_mail'] === 'yes' ) {
+					$this->send_mail( $options['agiledrop_field_title'], $email );
+				}
 			}
 		}
 

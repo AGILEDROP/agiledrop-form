@@ -1,14 +1,20 @@
 jQuery(document).ready(function( $ ) {
+
     $('#agiledrop-form').on('submit', function(e) {
+
         e.preventDefault();
         var form = $(this);
+        console.log( form.find( '#_wpnonce' ).val() )
         var name     = form.find('#name').val(),
             email    = form.find( '#email' ).val(),
             location = form.find( '#location').val(),
             status   = $('input[name=status]:checked', form).val(),
             job      =  form.find( '#zaposlitev').prop("checked"),
             dataProcessing = form.find( '#obdelava-podatkov').prop("checked"),
-            ajaxUrl  = form.data( 'url');
+            ajaxUrl  = form.data( 'url'),
+            nonce    = form.find( '#agiledrop_form_nonce' ).val();
+
+
 
 
         if ( name === '') {
@@ -38,7 +44,8 @@ jQuery(document).ready(function( $ ) {
                 status: status,
                 job: job,
                 dataProcessing: dataProcessing,
-                action: 'agiledrop_save_form'
+                action: 'agiledrop_save_form',
+                nonce: nonce
             },
             error: function ( response ) {
                 $('#form-status').text( 'Something went wrong please try later.');
