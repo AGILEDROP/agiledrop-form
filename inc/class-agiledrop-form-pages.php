@@ -28,18 +28,38 @@ if ( !class_exists('Agiledrop_Form_Pages' ) ) {
 	        register_setting( 'agiledrop_form', 'agiledrop_form_options' );
 
 	        add_settings_section(
-		        'agiledrop_section_title',
+	                'agiledrop_section_mail',
+                    false,
+                false,
+                'agiledrop_form'
+            );
+
+	        add_settings_section(
+		        'agiledrop_section_settings',
 		        false,
-		        array( $this, 'section_title' ),
+		        false,
 		        'agiledrop_form'
 	        );
+
+	        add_settings_field(
+	            'agiledrop_field_mail',
+                    __( 'Notify admin about new submit', 'agiledrop-domain' ),
+                    array( $this, 'field_mail' ),
+                    'agiledrop_form',
+                'agiledrop_section_mail',
+                [
+                        'label_for'             => 'agiledrop_field_mail',
+                        'class'                 => 'agiledrop-row',
+                        'agiledrop_custom_data' => 'custom'
+                ]
+            );
 
 	        add_settings_field(
 		        'agiledrop_field_title',
 		        __( 'Title', 'agiledrop-domain' ),
 		        array( $this, 'field_title' ),
 		        'agiledrop_form',
-		        'agiledrop_section_title',
+		        'agiledrop_section_settings',
 		        [
 			        'label_for' => 'agiledrop_field_title',
 			        'class' => 'agiledrop-row',
@@ -48,11 +68,22 @@ if ( !class_exists('Agiledrop_Form_Pages' ) ) {
 	        );
         }
 
-	    public function section_title( $args ) {
-		    ?>
-            <p id="<?php echo esc_attr( $args['id'] ); ?>"><?php esc_html_e( 'Insert the title of the form.', 'agiledrop-domain' ); ?></p>
-		    <?php
-	    }
+        public function field_mail( $args ) {
+	        $options = get_option( 'agiledrop_form_options' );
+	        ?>
+            <select id="<?php echo esc_attr( $args['label_for'] ); ?>"
+                    data-custom="<?php echo esc_attr( $args['agiledrop_custom_data'] ); ?>"
+                    name="agiledrop_form_options[<?php echo esc_attr( $args['label_for'] ); ?>]"
+            >
+                <option value="yes" <?php echo isset( $options[ $args['label_for'] ] ) ? ( selected( $options[ $args['label_for'] ], 'yes', false ) ) : ( '' ); ?>>
+			        <?php esc_html_e( 'Yes', 'agiledrop-domain' ); ?>
+                </option>
+                <option value="no" <?php echo isset( $options[ $args['label_for'] ] ) ? ( selected( $options[ $args['label_for'] ], 'no', false ) ) : ( '' ); ?>>
+			        <?php esc_html_e( 'No', 'agiledrop-domain' ); ?>
+                </option>
+            </select>
+	        <?php
+        }
 
 	    public function field_title( $args ) {
 		    $options = get_option( 'agiledrop_form_options' );

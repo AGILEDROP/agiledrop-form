@@ -101,6 +101,18 @@ if ( !class_exists( "Agiledrop_Form_Processing" ) ) {
 				)
 			);
 			wp_insert_post( $args );
+
+			if ( $options['agiledrop_field_mail'] === 'yes' ) {
+			    $this->send_mail( $options['agiledrop_field_title'], $email );
+			}
+		}
+
+		private function send_mail( $title, $email ) {
+            $to = get_bloginfo( 'admin_email' );
+            $subject = 'New submit on ' . $title;
+            $message = "Review form submit ";
+            $headers = 'From: ' . $email;
+            wp_mail( $to, $subject, $message, $headers );
 		}
 
 	}
