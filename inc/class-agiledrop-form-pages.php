@@ -20,8 +20,7 @@ if ( !class_exists('Agiledrop_Form_Pages' ) ) {
                 'Messages',
                 'Messages',
                 'manage_options',
-                'agiledrop_messages',
-                false
+                'edit.php?post_type=agiledrop-message'
             );
 	    }
 
@@ -34,7 +33,6 @@ if ( !class_exists('Agiledrop_Form_Pages' ) ) {
 		        array( $this, 'section_title' ),
 		        'agiledrop_form'
 	        );
-
 
 	        add_settings_field(
 		        'agiledrop_field_title',

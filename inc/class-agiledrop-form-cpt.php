@@ -14,7 +14,7 @@ if ( !class_exists( "Agiledrop_Form_Cpt" ) ) {
 					'singular_name' => __( 'Message', 'agiledrop-domain' ),
 				),
 				'show_ui'           => true,
-				'show_in_menu'      => 'agiledrop_message',
+				'show_in_menu'      => false,
 				'capability_type'   => 'post',
 				'hierarchical'      => false,
 				'supports'          => array( 'title' ),
