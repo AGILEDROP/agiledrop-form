@@ -85,8 +85,10 @@ if ( !class_exists( "Agiledrop_Form_Processing" ) ) {
 			if ( $_POST['dataProcessing'] == true ){
 				$data = 'Dovolim uporabo podatkov.';
 			}
+			$options = get_option( 'agiledrop_form_options' );
+
 			$args = array(
-				'post_title'    => 'Prijava na drupal tečaj',
+				'post_title'    => $options['agiledrop_field_title'],
 				'post_type'     => 'agiledrop-message',
 				'post_status'   => 'publish',
 				'meta_input'    => array(
