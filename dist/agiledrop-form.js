@@ -4,55 +4,27 @@ jQuery(document).ready(function( $ ) {
 
         e.preventDefault();
         var form = $(this);
-        console.log( form.find( '#_wpnonce' ).val() )
-        var name     = form.find('#name').val(),
-            email    = form.find( '#email' ).val(),
-            location = form.find( '#location').val(),
-            status   = $('input[name=status]:checked', form).val(),
-            job      =  form.find( '#zaposlitev').prop("checked"),
-            dataProcessing = form.find( '#obdelava-podatkov').prop("checked"),
-            ajaxUrl  = form.data( 'url'),
-            nonce    = form.find( '#agiledrop_form_nonce' ).val();
+        var formData = form.serializeArray();
 
-
-
-
-        if ( name === '') {
-            $('#name-error').css("display", "grid");
-            $('#name-error').text( 'Name field required' );
-            return;
-        }
-        if ( email === '') {
-            $('#email-error').css("display", "grid");
-            $('#email-error').text( 'Email field required' );
-            return;
-        }
-        if ( location === '') {
-            $('#location-error').css("display", "grid");
-            $('#location-error').text( 'Location is required' );
-            return;
-        }
-
+        var ajaxUrl = form.data( 'url'),
+            action  = form.attr( 'action' ),
+            nonce   = form.find( '#agiledrop_form_nonce').val();
 
         $.ajax({
             url: ajaxUrl,
             type: 'post',
             data: {
-                name: name,
-                email: email,
-                location: location,
-                status: status,
-                job: job,
-                dataProcessing: dataProcessing,
-                action: 'agiledrop_save_form',
+                fields: formData,
+                action: action,
                 nonce: nonce
             },
-            error: function ( response ) {
+            error: function () {
                 $('#form-status').text( 'Something went wrong please try later.');
             },
             success: function( response ) {
-                if ( response === false) {
-                    $('#form-status').text( 'Something went wrong please try later.');
+                var output = JSON.parse(response);
+                if ( response != 0 ) {
+                    $('#form-status').text( output.message );
                 }
                 else {
                     $('#form-status').text( 'Your message was successfully send.');
