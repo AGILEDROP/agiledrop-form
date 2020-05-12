@@ -41,6 +41,14 @@ if ( !class_exists( "Agiledrop_Form_Processing" ) ) {
 	        return $fields;
         }
 
+        private function prepare_meta( $fields ) {
+		    $meta_input = [];
+		    foreach ( $fields as $field ) {
+		        $meta_input[$field['name']] = $field['value'];
+		    }
+		    return $meta_input;
+        }
+
 		public function form_save( ) {
 			if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'handle_agiledrop_form' ) ) {
 				die( json_encode( array( 'message' => 'Nonce did not verify' ) ) );
@@ -49,30 +57,24 @@ if ( !class_exists( "Agiledrop_Form_Processing" ) ) {
                     $fields = $_POST['fields'];
                     array_splice( $fields, -2 );
                     $fields = $this->sanitize_fields( $fields );
-				    return;
-				    /*
+                    $meta_input = $this->prepare_meta( $fields );
+
                     $options = get_option( 'agiledrop_form_options' );
 
                     $args = array(
                         'post_title'    => $options['agiledrop_field_title'],
                         'post_type'     => 'agiledrop-message',
                         'post_status'   => 'publish',
-                        'meta_input'    => array(
-                            'name'      => $name,
-                            'email'     => $email,
-                            'location'  => $location,
-                            'status'    => $status,
-                            'job'       => $job,
-                            'data'      => $data,
-                        )
+                        'meta_input'    => $meta_input
                     );
-                    wp_insert_post( $args );
+                    $a = wp_insert_post( $args );
 
+                    /*
                     if ( $options['agiledrop_field_mail'] === 'yes' ) {
                         $this->send_mail( $options['agiledrop_field_title'], $email );
                     }*/
 			    }
-			    echo "exit";
+				die( json_encode( array( 'message' => 'Something went wrong, please try later.' ) ) );
 			}
 		}
 

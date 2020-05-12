@@ -3,8 +3,8 @@ if ( !class_exists( "Agiledrop_Form_Cpt" ) ) {
 	class Agiledrop_Form_Cpt {
 		public function __construct() {
 			add_action( 'init', array( $this, 'register_cpt' ) );
-			add_filter( 'manage_agiledrop-message_posts_columns', array( $this, 'create_columns' ) );
-			add_action( 'manage_agiledrop-message_posts_custom_column', array( $this, 'set_column' ) );
+			//add_filter( 'manage_agiledrop-message_posts_columns', array( $this, 'create_columns' ) );
+			//add_action( 'manage_agiledrop-message_posts_custom_column', array( $this, 'set_column' ) );
 		}
 
 		public function register_cpt(){
@@ -26,7 +26,7 @@ if ( !class_exists( "Agiledrop_Form_Cpt" ) ) {
 		public function add_custom_meta_box() {
 			add_meta_box(
 				'agiledrop_form_data',
-				__( 'Participant', 'agiledrop' ),
+				__( 'Form Data', 'agiledrop' ),
 				array( $this, 'custom_meta_box_data' ),
 				'agiledrop-message',
 				'advanced',
@@ -36,21 +36,13 @@ if ( !class_exists( "Agiledrop_Form_Cpt" ) ) {
 
 		public function custom_meta_box_data( $post ) {
 			$post_values = get_post_meta( $post->ID );
-			echo "<h3>Participant</h3><p>";
-			echo $post_values['name'][0];
-			echo "</p><h3>Email</h3><p>";
-			echo $post_values['email'][0];
-			echo "</p><h3>Location</h3><p>";
-			echo $post_values['location'][0];
-			echo "</p><h3>Status</h3><p>";
-			echo $post_values['status'][0];
-			echo "</p><h3>Job interest</h3><p>";
-			echo $post_values['job'][0];
-			echo "</p><h3>Allowed data processing</h3><p>";
-			echo $post_values['data'][0];
-			echo "</p>";
+			foreach ( $post_values as $key => $value ) {
+				if ( $key !== '_edit_lock' ) {
+					echo '<h3>' . $key . '</h3>';
+					echo '<p>' . $value[0] . '</p>';
+				}
+			}
 		}
-
 
 		public function create_columns( $columns ) {
 			$columns['name']     = __( 'Participant', 'agiledrop-domain' );
