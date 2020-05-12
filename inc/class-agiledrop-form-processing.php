@@ -3,10 +3,33 @@
 if ( !class_exists( "Agiledrop_Form_Processing" ) ) {
 	class Agiledrop_Form_Processings {
 		public function __construct() {
-			add_shortcode( 'agiledrop_form', array( $this, 'display_form' ) );
+			add_shortcode( 'agiledrop_form', array( $this, 'generate_form' ) );
 			add_action( 'wp_ajax_nopriv_agiledrop_save_form', array( $this, 'form_save' ) );
 			add_action( 'wp_ajax_agiledrop_save_form', array( $this, 'form_save' ) );
 		}
+
+		public function generate_form() {
+		    $fields = get_option( 'agiledrop_form_fields_options' );
+            if ( ! $fields ) {
+	            echo "Create form fields first";
+            }
+            else {
+                ob_start();?>
+                <form class="form" id="agiledrop-form" action="#" method="post" data-url="<?php echo admin_url('admin-ajax.php'); ?>">
+                    <?php foreach ( $fields as $field ) :?>
+                        <div class="form__group">
+                            <label for="<?php echo $field['title']?>"><?php echo $field['title']; ?></label>
+                            <input type="<?php echo $field['type']?>" name="<?php echo $field['title']?>">
+                        </div>
+                    <?php endforeach; ?>
+                    <p id="form-status"></p>
+	                <?php wp_nonce_field( 'handle_agiledrop_form', 'agiledrop_form_nonce' )?>
+                    <button type="submit" class="form__button">Pošlji</button>
+                </form>
+                <?php return ob_get_clean();
+            }
+
+        }
 
 		public function display_form( ) {
 			ob_start();?>
