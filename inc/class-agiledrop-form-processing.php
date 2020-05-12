@@ -67,23 +67,25 @@ if ( !class_exists( "Agiledrop_Form_Processing" ) ) {
                         'post_status'   => 'publish',
                         'meta_input'    => $meta_input
                     );
-                    $a = wp_insert_post( $args );
 
-                    /*
-                    if ( $options['agiledrop_field_mail'] === 'yes' ) {
+                    wp_insert_post( $args );
+
+                    if ( $options['agiledrop_field_mail_option'] === 'yes' ) {
+                        $email = $options['agiledrop_field_user_email'];
                         $this->send_mail( $options['agiledrop_field_title'], $email );
-                    }*/
+                    }
 			    }
-				die( json_encode( array( 'message' => 'Something went wrong, please try later.' ) ) );
+			    else {
+				    die( json_encode( array( 'message' => 'Something went wrong, please try later.' ) ) );
+			    }
 			}
 		}
 
 		private function send_mail( $title, $email ) {
-            $to = get_bloginfo( 'admin_email' );
             $subject = 'New submit on ' . $title;
             $message = "Review form submit ";
-            $headers = 'From: ' . $email;
-            wp_mail( $to, $subject, $message, $headers );
+            $headers = 'From: ' . get_bloginfo( 'admin_email' );
+            wp_mail( $email, $subject, $message, $headers );
 		}
 
 	}
