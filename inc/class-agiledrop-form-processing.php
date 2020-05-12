@@ -18,8 +18,8 @@ if ( !class_exists( "Agiledrop_Form_Processing" ) ) {
                 <form class="form" id="agiledrop-form" action="agiledrop_save_form" method="post" data-url="<?php echo admin_url('admin-ajax.php'); ?>">
                     <?php foreach ( $fields as $field ) :?>
                         <div class="form__group">
-                            <label for="<?php echo $field['title']?>"><?php echo $field['title']; ?></label>
-                            <input type="<?php echo $field['type']?>" name="<?php echo $field['title']?>">
+                            <label for="<?php echo $field['id']?>"><?php echo $field['name']; ?></label>
+                            <input type="<?php echo $field['type']?>" name="<?php echo $field['id']?>" placeholder="<?php echo $field['placeholder'];?>">
                         </div>
                     <?php endforeach; ?>
                     <p id="form-status"></p>
@@ -62,7 +62,7 @@ if ( !class_exists( "Agiledrop_Form_Processing" ) ) {
                     $options = get_option( 'agiledrop_form_options' );
 
                     $args = array(
-                        'post_title'    => $options['agiledrop_field_title'],
+                        'post_title'    => $options['agiledrop_field_form_name'],
                         'post_type'     => 'agiledrop-message',
                         'post_status'   => 'publish',
                         'meta_input'    => $meta_input
@@ -72,7 +72,7 @@ if ( !class_exists( "Agiledrop_Form_Processing" ) ) {
 
                     if ( $options['agiledrop_field_mail_option'] === 'yes' ) {
                         $email = $options['agiledrop_field_user_email'];
-                        $this->send_mail( $options['agiledrop_field_title'], $email );
+                        $this->send_mail( $options['agiledrop_field_form_name'], $email );
                     }
 			    }
 			    else {

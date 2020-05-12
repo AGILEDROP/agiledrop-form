@@ -37,7 +37,16 @@ new Agiledrop_Form_Enqueues();
  */
 require AGILEDROP_PLUGIN_DIR . '/inc/class-agiledrop-form-pages.php';
 new Agiledrop_Form_Pages();
-
+/**
+ * Plugin settings fields.
+ */
+require_once AGILEDROP_PLUGIN_DIR . '/inc/class-agiledrop-form-settings-fields.php';
+new Agiledrop_Form_Settings_Fields();
+/**
+ * Plugin other fields.
+ */
+require_once AGILEDROP_PLUGIN_DIR . '/inc/class-agiledrop-form-fields.php';
+new Agiledrop_Form_Fields();
 /**
  * Plugin CPT
  */

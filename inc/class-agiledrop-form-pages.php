@@ -39,141 +39,28 @@ if ( !class_exists('Agiledrop_Form_Pages' ) ) {
 
 	        add_settings_section(
 	                'agiledrop_section_fields',
-                'test',
+                    false,
                        false,
                 'agiledrop_form_fields'
             );
-
-	        add_settings_field(
-	            'agiledrop_field_mail_option',
-                    __( 'Forward form submit to mail', 'agiledrop-domain' ),
-                    array( $this, 'field_mail' ),
-                    'agiledrop_form',
-                'agiledrop_section_settings',
-                [
-                        'label_for'             => 'agiledrop_field_mail_option',
-                        'class'                 => 'agiledrop-row',
-                        'agiledrop_custom_data' => 'custom'
-                ]
-            );
-
-	        add_settings_field(
-		        'agiledrop_field_user_email',
-		        __( 'Select user email', 'agiledrop-domain' ),
-		        array( $this, 'field_user_email' ),
-		        'agiledrop_form',
-		        'agiledrop_section_settings',
-		        [
-			        'label_for'             => 'agiledrop_field_user_email',
-			        'class'                 => 'agiledrop-row',
-			        'agiledrop_custom_data' => 'custom'
-		        ]
-	        );
-
-
-	        add_settings_field(
-		        'agiledrop_field_title',
-		        __( 'Title', 'agiledrop-domain' ),
-		        array( $this, 'field_title' ),
-		        'agiledrop_form',
-		        'agiledrop_section_settings',
-		        [
-			        'label_for' => 'agiledrop_field_title',
-			        'class' => 'agiledrop-row',
-			        'agiledrop_custom_data' => 'custom',
-		        ]
-	        );
-
-	        add_settings_field(
-	                'agiledrop_add_field',
-                        __( 'Select input type', 'agiledrop-domain' ),
-                array( $this, 'add_field' ),
-                'agiledrop_form_fields',
-                'agiledrop_section_fields',
-                [
-                        'label_for'    => 'agiledrop_add_field',
-                        'class'        => 'agiledrop-row',
-                        'agiledrop_field_data' => 'custom'
-                ]
-            );
-        }
-
-        public function add_field( $args ) {
-	        $options = get_option( 'agiledrop_form_fields_options' );
-	        ?>
-            <select id="<?php echo esc_attr( $args['label_for'] ); ?>"
-                    data-custom="<?php echo esc_attr( $args['agiledrop_field_data'] ); ?>"
-                    name="agiledrop_form_fields_options[type]"
-            >
-                <option value="text" <?php echo isset( $options[ $args['label_for'] ] ) ? ( selected( $options[ $args['label_for'] ], 'text', false ) ) : ( '' ); ?>>
-			        <?php esc_html_e( 'Text', 'agiledrop-domain' ); ?>
-                </option>
-                <option value="email" <?php echo isset( $options[ $args['label_for'] ] ) ? ( selected( $options[ $args['label_for'] ], 'email', false ) ) : ( '' ); ?>>
-			        <?php esc_html_e( 'Email', 'agiledrop-domain' ); ?>
-                </option>
-            </select>
-            <label for="agiledrop_form_fields_options[title]">Add title to field</label>
-            <input type="text"
-                   name="agiledrop_form_fields_options[title]"
-                   data-custom="<?php esc_attr( $args['agiledrop_field_data'] );?> required"
-            >
-	        <?php
         }
 
         public function save_fields( $args ) {
             $existing_fields = get_option( 'agiledrop_form_fields_options' );
             $new_field[] = $args;
             if ( empty( $existing_fields ) ) {
+                $new_field[0]['id'] = 'field-1';
+                $new_field[0]['id_value'] = 1;
                 return $new_field;
             }
+            $last = end( $existing_fields );
+            $last_id = $last['id_value'];
+            $last_id++;
+            $new_field[0]['id'] = 'field-'.$last_id;
+            $new_field[0]['id_value'] = $last_id;
+
             return array_merge( $existing_fields, $new_field );
         }
-
-        public function field_mail( $args ) {
-	        $options = get_option( 'agiledrop_form_options' );
-	        ?>
-            <select id="<?php echo esc_attr( $args['label_for'] ); ?>"
-                    data-custom="<?php echo esc_attr( $args['agiledrop_custom_data'] ); ?>"
-                    name="agiledrop_form_options[<?php echo esc_attr( $args['label_for'] ); ?>]"
-            >
-
-                <option value="yes" <?php echo isset( $options[ $args['label_for'] ] ) ? ( selected( $options[ $args['label_for'] ], 'yes', false ) ) : ( '' ); ?>>
-			        <?php esc_html_e( 'Yes', 'agiledrop-domain' ); ?>
-                </option>
-                <option value="no" <?php echo isset( $options[ $args['label_for'] ] ) ? ( selected( $options[ $args['label_for'] ], 'no', false ) ) : ( '' ); ?>>
-			        <?php esc_html_e( 'No', 'agiledrop-domain' ); ?>
-                </option>
-            </select>
-	        <?php
-        }
-
-        public function field_user_email( $args ) {
-            $options = get_option( 'agiledrop_form_options' );
-            $all_users = get_users( array( 'role__not_in' => 'administrator' ) );
-	        ?>
-            <select id="<?php echo esc_attr( $args['label_for'] ); ?>"
-                    data-custom="<?php echo esc_attr( $args['agiledrop_custom_data'] ); ?>"
-                    name="agiledrop_form_options[<?php echo esc_attr( $args['label_for'] ); ?>]"
-            >
-            <?php foreach ( $all_users as $user ) {?>
-                <option value="<?php echo $user->user_email; ?>" <?php echo isset( $options[ $args['label_for'] ] ) ? ( selected( $options[ $args['label_for'] ], $user->user_email, false ) ) : ( '' ); ?>>
-                    <?php echo esc_html( $user->user_email ); ?>
-                </option>
-            <?php }?>
-            </select>
-	        <?php
-        }
-
-	    public function field_title( $args ) {
-		    $options = get_option( 'agiledrop_form_options' );
-		    ?>
-            <input type="text"
-                   name="agiledrop_form_options[<?php echo esc_attr( $args['label_for'] );?>]"
-                   data-custom="<?php esc_attr( $args['agiledrop_custom_data'] );?>"
-                   value="<?php echo $options['agiledrop_field_title']; ?>"
-            >
-		    <?php
-	    }
 
 	    public function options_page_html() {
 		    if ( ! current_user_can( 'manage_options' ) ) {

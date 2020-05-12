@@ -28,8 +28,8 @@
             foreach ( $fields as $field ) :
     ?>
     <form action="#">
-        <label for="<?php echo $field['title']; ?>"><?php echo $field['title']?></label>
-        <input type="<?php echo $field['type'];?>">
+        <label for="<?php echo $field['id']; ?>"><?php echo $field['name']?></label>
+        <input name="<?php echo $field['id'];?>" type="<?php echo $field['type'];?>" placeholder="<?php echo $field['placeholder'];?>">
     </form>
     <?php endforeach; }?>
 </div>
