@@ -47,12 +47,19 @@ if ( !class_exists('Agiledrop_Form_Pages' ) ) {
 
         public function save_fields( $args ) {
             $existing_fields = get_option( 'agiledrop_form_fields_options' );
+			//using when deleting field
+            if ( isset( $args['delete'] ) ) {
+				array_pop( $args );
+				return $args;
+			}
             $new_field[] = $args;
+
             if ( empty( $existing_fields ) ) {
                 $new_field[0]['id'] = 'field-1';
                 $new_field[0]['id_value'] = 1;
                 return $new_field;
             }
+
             $last = end( $existing_fields );
             $last_id = $last['id_value'];
             $last_id++;

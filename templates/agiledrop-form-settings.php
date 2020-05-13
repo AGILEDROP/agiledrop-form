@@ -27,9 +27,27 @@
         }else {
             foreach ( $fields as $field ) :
     ?>
-    <form action="#">
+    <form action="#" method="post">
         <label for="<?php echo $field['id']; ?>"><?php echo $field['name']?></label>
         <input name="<?php echo $field['id'];?>" type="<?php echo $field['type'];?>" placeholder="<?php echo $field['placeholder'];?>">
+        <input type="hidden" name="field" value="<?php echo $field['id']; ?>">
+        <input type="submit" name="delete" value="Delete" />
     </form>
     <?php endforeach; }?>
 </div>
+
+<?php
+if ( isset( $_POST ) ) {
+    if ( isset( $_POST['delete' ] ) ) {
+        $field_id = $_POST['field'];
+        $fields = get_option( 'agiledrop_form_fields_options' );
+        foreach ( $fields as $key => $value ) {
+            if ( $value['id'] === $field_id ) {
+                unset($fields[$key]);
+            }
+        }
+        $fields = array_values( $fields );
+        $fields['delete'] = true;
+        update_option( 'agiledrop_form_fields_options', $fields );
+    }
+}
