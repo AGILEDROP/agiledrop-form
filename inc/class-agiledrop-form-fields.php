@@ -37,7 +37,7 @@ if ( ! class_exists( 'Agiledrop_Form_Fields' ) ) {
 				'agiledrop_section_fields',
 				[
 					'label_for'    => 'agiledrop_field_placeholder',
-					'class'        => 'agiledrop-row',
+					'class'        => 'agiledrop-row placeholder',
 					'agiledrop_field_data' => 'custom'
 				]
 			);
@@ -58,6 +58,9 @@ if ( ! class_exists( 'Agiledrop_Form_Fields' ) ) {
 				</option>
                 <option value="textarea" <?php echo isset( $options[ $args['label_for'] ] ) ? ( selected( $options[ $args['label_for'] ], 'textarea', false ) ) : ( '' ); ?>>
 					<?php esc_html_e( 'Textarea', 'agiledrop-domain' ); ?>
+                </option>
+                <option value="checkbox" <?php echo isset( $options[ $args['label_for'] ] ) ? ( selected( $options[ $args['label_for'] ], 'checkbox', false ) ) : ( '' ); ?>>
+					<?php esc_html_e( 'Checkbox', 'agiledrop-domain' ); ?>
                 </option>
 			</select>
 			<?php

@@ -31,7 +31,9 @@
         <label for="<?php echo $field['id']; ?>"><?php echo $field['name']?></label>
         <?php if ( $field['type'] === 'textarea' ) :?>
             <textarea name="<?php echo $field['id'];?>" cols="24" rows="5" placeholder="<?php echo $field['placeholder']; ?>"></textarea>
-         <?php else: ?>
+         <?php elseif( $field['type'] === 'checkbox' ) : ?>
+            <input type="checkbox" name="<?php echo $field['id']; ?>" value="<?php echo $field['id'];?>>">
+        <?php else:?>
             <input name="<?php echo $field['id'];?>" type="<?php echo $field['type'];?>" placeholder="<?php echo $field['placeholder'];?>">
          <?php endif; ?>
         <input type="hidden" name="field" value="<?php echo $field['id']; ?>">
