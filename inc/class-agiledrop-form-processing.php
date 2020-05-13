@@ -19,7 +19,11 @@ if ( !class_exists( "Agiledrop_Form_Processing" ) ) {
                     <?php foreach ( $fields as $field ) :?>
                         <div class="form__group">
                             <label for="<?php echo $field['id']?>"><?php echo $field['name']; ?></label>
-                            <input type="<?php echo $field['type']?>" name="<?php echo $field['id']?>" placeholder="<?php echo $field['placeholder'];?>">
+                            <?php if ( $field['type'] === 'textarea' ) : ?>
+                                <textarea name="<?php echo $field['id'];?>" placeholder="<?php echo $field['placeholder']; ?>"></textarea>
+                            <?php else:?>
+                                <input type="<?php echo $field['type']?>" name="<?php echo $field['id']?>" placeholder="<?php echo $field['placeholder'];?>">
+                            <?php endif;?>
                         </div>
                     <?php endforeach; ?>
                     <p id="form-status"></p>

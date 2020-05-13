@@ -56,6 +56,9 @@ if ( ! class_exists( 'Agiledrop_Form_Fields' ) ) {
 				<option value="email" <?php echo isset( $options[ $args['label_for'] ] ) ? ( selected( $options[ $args['label_for'] ], 'email', false ) ) : ( '' ); ?>>
 					<?php esc_html_e( 'Email', 'agiledrop-domain' ); ?>
 				</option>
+                <option value="textarea" <?php echo isset( $options[ $args['label_for'] ] ) ? ( selected( $options[ $args['label_for'] ], 'textarea', false ) ) : ( '' ); ?>>
+					<?php esc_html_e( 'Textarea', 'agiledrop-domain' ); ?>
+                </option>
 			</select>
 			<?php
 		}
