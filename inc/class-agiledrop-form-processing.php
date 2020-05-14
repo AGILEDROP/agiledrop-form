@@ -20,11 +20,11 @@ if ( !class_exists( "Agiledrop_Form_Processing" ) ) {
                         <div class="form__group">
                             <label for="<?php echo $field['id']?>"><?php echo $field['name']; ?></label>
 	                        <?php if ( $field['type'] === 'textarea' ) :?>
-                                <textarea name="<?php echo $field['id'];?>" cols="24" rows="5" placeholder="<?php echo $field['placeholder']; ?>"></textarea>
+                                <textarea class="form__textarea" name="<?php echo $field['id'];?>" cols="24" rows="5" placeholder="<?php echo $field['placeholder']; ?>"></textarea>
 	                        <?php elseif( $field['type'] === 'checkbox' ) : ?>
-                                <input type="checkbox" name="<?php echo $field['id']; ?>" value="yes">
+                                <input class="form__checkbox" type="checkbox" name="<?php echo $field['id']; ?>" value="yes">
 	                        <?php else:?>
-                                <input name="<?php echo $field['id'];?>" type="<?php echo $field['type'];?>" placeholder="<?php echo $field['placeholder'];?>">
+                                <input class="form__input" name="<?php echo $field['id'];?>" type="<?php echo $field['type'];?>" placeholder="<?php echo $field['placeholder'];?>">
 	                        <?php endif; ?>
                         </div>
                     <?php endforeach; ?>
