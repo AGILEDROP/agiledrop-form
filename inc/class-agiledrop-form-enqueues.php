@@ -9,11 +9,11 @@ if ( ! class_exists( "Agiledrop_Form_Enqueues" ) ) {
 		}
 
 		public function register_script() {
-			wp_enqueue_script( 'agiledrop-form-js', plugin_dir_url(__DIR__ ) . '/dist/agiledrop-form.js', array( 'jquery') );
+			wp_enqueue_script( 'agiledrop-form-js', plugin_dir_url(__DIR__ ) . '/dist/agiledrop-form-min.js', array( 'jquery') );
 		}
 
 		public function register_admin_script() {
-			wp_enqueue_script( 'agiledrop-form-admin-js', plugin_dir_url(__DIR__ ) . '/dist/agiledrop-form-admin.js', array( 'jquery') );
+			wp_enqueue_script( 'agiledrop-form-admin-js', plugin_dir_url(__DIR__ ) . '/dist/agiledrop-form-admin-min.js', array( 'jquery') );
 		}
 	}
 }

@@ -1,0 +1,1 @@
+jQuery(document).ready(function(e){e("#agiledrop_field_type").change(function(){"checkbox"===e(this).val()?e(".placeholder").hide():e(".placeholder").show()})});
