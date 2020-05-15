@@ -18,6 +18,7 @@
     "gulp-if": "^3.0.0",
     "gulp-minify": "^3.1.0",
     "gulp-sass": "^4.1.0",
+    "gulp-wp-pot": "^2.4.2",
     "yargs": "^15.3.1"
   }
 }

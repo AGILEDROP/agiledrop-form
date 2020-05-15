@@ -1,0 +1,98 @@
+# Copyright (C) 2020 agiledrop-domain
+# This file is distributed under the same license as the agiledrop-domain package.
+msgid ""
+msgstr ""
+"Project-Id-Version: agiledrop-domain\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: inc/class-agiledrop-form-cpt.php:13
+msgid "Messages"
+msgstr ""
+
+#: inc/class-agiledrop-form-cpt.php:14
+msgid "Message"
+msgstr ""
+
+#: inc/class-agiledrop-form-cpt.php:48
+msgid "Participant"
+msgstr ""
+
+#: inc/class-agiledrop-form-cpt.php:49, inc/class-agiledrop-form-fields.php:57
+msgid "Email"
+msgstr ""
+
+#: inc/class-agiledrop-form-cpt.php:50
+msgid "Location"
+msgstr ""
+
+#: inc/class-agiledrop-form-cpt.php:51
+msgid "Status"
+msgstr ""
+
+#: inc/class-agiledrop-form-cpt.php:52
+msgid "Job"
+msgstr ""
+
+#: inc/class-agiledrop-form-cpt.php:53
+msgid "Data"
+msgstr ""
+
+#: inc/class-agiledrop-form-fields.php:10
+msgid "Select input type"
+msgstr ""
+
+#: inc/class-agiledrop-form-fields.php:22
+msgid "Add name of input"
+msgstr ""
+
+#: inc/class-agiledrop-form-fields.php:34
+msgid "Add placeholder"
+msgstr ""
+
+#: inc/class-agiledrop-form-fields.php:54
+msgid "Text"
+msgstr ""
+
+#: inc/class-agiledrop-form-fields.php:60
+msgid "Textarea"
+msgstr ""
+
+#: inc/class-agiledrop-form-fields.php:63
+msgid "Checkbox"
+msgstr ""
+
+#: inc/class-agiledrop-form-pages.php:78
+msgid "Settings Saved"
+msgstr ""
+
+#: inc/class-agiledrop-form-settings-fields.php:11
+msgid "Forward form submit to mail"
+msgstr ""
+
+#: inc/class-agiledrop-form-settings-fields.php:23
+msgid "Select user email"
+msgstr ""
+
+#: inc/class-agiledrop-form-settings-fields.php:35
+msgid "Name of the form"
+msgstr ""
+
+#: inc/class-agiledrop-form-settings-fields.php:55
+msgid "Yes"
+msgstr ""
+
+#: inc/class-agiledrop-form-settings-fields.php:58
+msgid "No"
+msgstr ""
+
+#: templates/agiledrop-form-settings.php:4
+msgid "Add form with shortcode [agiledrop_form]"
+msgstr ""

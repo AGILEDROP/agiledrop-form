@@ -4,6 +4,7 @@ const sass = require('gulp-sass');
 const cleanCSS = require('gulp-clean-css');
 const gulpIf = require('gulp-if');
 const minify = require('gulp-minify');
+const wpPot = require('gulp-wp-pot');
 
 const PRODUCTION = yargs.argv.prod;
 
@@ -25,3 +26,9 @@ gulp.task( 'watch', () => {
 });
 
 gulp.task('build', gulp.parallel('scripts', 'styles'));
+
+gulp.task( 'translate', () => {
+    return gulp.src(['templates/*.php', 'inc/*.php'])
+               .pipe(wpPot({domain: 'agiledrop-domain'}))
+               .pipe(gulp.dest('languages/agiledrop-domain.pot'));
+});

@@ -59,8 +59,12 @@ new Agiledrop_Form_Cpt();
 require AGILEDROP_PLUGIN_DIR . '/inc/class-agiledrop-form-processing.php';
 new Agiledrop_Form_Processings();
 
-
-
-
+/**
+ * Text domain
+ */
+add_action( 'init', 'agiledrop_form_load_textdomain' );
+function agiledrop_form_load_textdomain() {
+	load_plugin_textdomain( 'agiledrop-domain', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+}
 
 
