@@ -1,4 +1,5 @@
 <?php
+namespace AgiledropForm;
 if ( !class_exists('Agiledrop_Form_Pages' ) ) {
     class Agiledrop_Form_Pages {
 

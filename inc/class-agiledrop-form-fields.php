@@ -1,4 +1,5 @@
 <?php
+namespace AgiledropForm;
 if ( ! class_exists( 'Agiledrop_Form_Fields' ) ) {
 	class Agiledrop_Form_Fields{
 		public function __construct() {

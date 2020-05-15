@@ -1,5 +1,5 @@
 <?php
-
+namespace AgiledropForm;
 if ( !class_exists( "Agiledrop_Form_Processing" ) ) {
 	class Agiledrop_Form_Processings {
 		public function __construct() {

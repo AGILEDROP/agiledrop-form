@@ -1,5 +1,5 @@
 <?php
-
+namespace AgiledropForm;
 if ( ! class_exists( "Agiledrop_Form_Enqueues" ) ) {
 	class Agiledrop_Form_Enqueues {
 

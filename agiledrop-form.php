@@ -9,6 +9,8 @@
  * License: GPL2
  */
 
+require "vendor/autoload.php";
+
 /**
  * Define constants
  */
@@ -29,34 +31,36 @@ function agiledrop_form_settings_link( $links ) {
 /**
  * Plugin enqueues
  */
-require AGILEDROP_PLUGIN_DIR . '/inc/class-agiledrop-form-enqueues.php';
+use AgiledropForm\Agiledrop_Form_Enqueues;
 new Agiledrop_Form_Enqueues();
 
 /**
  * Plugin pages
  */
-require AGILEDROP_PLUGIN_DIR . '/inc/class-agiledrop-form-pages.php';
+use AgiledropForm\Agiledrop_Form_Pages;
 new Agiledrop_Form_Pages();
+
 /**
  * Plugin settings fields.
  */
-require_once AGILEDROP_PLUGIN_DIR . '/inc/class-agiledrop-form-settings-fields.php';
+use AgiledropForm\Agiledrop_Form_Settings_Fields;
 new Agiledrop_Form_Settings_Fields();
+
 /**
  * Plugin other fields.
  */
-require_once AGILEDROP_PLUGIN_DIR . '/inc/class-agiledrop-form-fields.php';
+use AgiledropForm\Agiledrop_Form_Fields;
 new Agiledrop_Form_Fields();
+
 /**
  * Plugin CPT
  */
-require AGILEDROP_PLUGIN_DIR . '/inc/class-agiledrop-form-cpt.php';
+use AgiledropForm\Agiledrop_Form_Cpt;
 new Agiledrop_Form_Cpt();
-
 /**
  * Process form
  */
-require AGILEDROP_PLUGIN_DIR . '/inc/class-agiledrop-form-processing.php';
+use AgiledropForm\Agiledrop_Form_Processings;
 new Agiledrop_Form_Processings();
 
 /**
