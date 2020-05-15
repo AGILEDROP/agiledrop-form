@@ -5,8 +5,6 @@ if ( !class_exists( "Agiledrop_Form_Cpt" ) ) {
 	class Agiledrop_Form_Cpt {
 		public function __construct() {
 			add_action( 'init', array( $this, 'register_cpt' ) );
-			//add_filter( 'manage_agiledrop-message_posts_columns', array( $this, 'create_columns' ) );
-			//add_action( 'manage_agiledrop-message_posts_custom_column', array( $this, 'set_column' ) );
 		}
 
 		public function register_cpt(){
@@ -43,40 +41,6 @@ if ( !class_exists( "Agiledrop_Form_Cpt" ) ) {
 					echo '<h3>' . $key . '</h3>';
 					echo '<p>' . $value[0] . '</p>';
 				}
-			}
-		}
-
-		public function create_columns( $columns ) {
-			$columns['name']     = __( 'Participant', 'agiledrop-domain' );
-			$columns['email']    = __( 'Email', 'agiledrop-domain' );
-			$columns['location'] = __( 'Location', 'agiledrop-domain' );
-			$columns['status']   = __( 'Status', 'agiledrop-domain' );
-			$columns['job']      = __( 'Job', 'agiledrop-domain' );
-			$columns['data']     = __( 'Data', 'agiledrop-domain' );
-			return $columns;
-		}
-
-		public function set_column( $column ) {
-			global $post;
-			switch( $column ){
-				case 'name':
-					echo get_post_meta( $post->ID, 'name', true );
-					break;
-				case 'email':
-					echo get_post_meta( $post->ID, 'email', true );
-					break;
-				case 'location':
-					echo get_post_meta( $post->ID, 'location', true );
-					break;
-				case 'status':
-					echo get_post_meta( $post->ID, 'status', true );
-					break;
-				case 'job':
-					echo get_post_meta( $post->ID, 'job', true );
-					break;
-				case 'data':
-					echo get_post_meta( $post->ID, 'data', true );
-					break;
 			}
 		}
 	}
